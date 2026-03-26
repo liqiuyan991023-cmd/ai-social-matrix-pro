@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String        @id @default(cuid())
+  name          String?
+  email         String        @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  userPlan      UserPlan?
+  usageLogs     UsageLog[]
+  socialAccounts SocialAccount[]
+  posts         Post[]
+  analytics     Analytics[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model UserPlan {
+  id        String   @id @default(cuid())
+  userId    String   @unique @map("user_id")
+  planType  String   @default("free") // free, basic, pro
+  startDate DateTime @default(now())
+  endDate   DateTime?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UsageLog {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  action    String   // ai_text, ai_image, ai_video, etc.
+  count     Int      @default(1)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model SocialAccount {
+  id           String   @id @default(cuid())
+  userId       String   @map("user_id")
+  platform     String   // youtube, tiktok, instagram, xiaohongshu, douyin
+  accountName  String
+  accessToken  String
+  refreshToken String?
+  expiresAt    DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  posts        Post[]
+}
+
+model Post {
+  id           String   @id @default(cuid())
+  userId       String   @map("user_id")
+  socialAccountId String @map("social_account_id")
+  platform     String
+  content      String
+  mediaUrl     String?
+  scheduledAt  DateTime?
+  status       String   @default("draft") // draft, scheduled, published, failed
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  socialAccount SocialAccount @relation(fields: [socialAccountId], references: [id], onDelete: Cascade)
+  analytics    Analytics[]
+}
+
+model Analytics {
+  id           String   @id @default(cuid())
+  userId       String   @map("user_id")
+  postId       String   @map("post_id")
+  platform     String
+  views        Int      @default(0)
+  likes        Int      @default(0)
+  comments     Int      @default(0)
+  shares       Int      @default(0)
+  followers    Int      @default(0)
+  collectedAt  DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post         Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model HotTopic {
+  id        String   @id @default(cuid())
+  platform  String
+  topic     String
+  heat      Int
+  url       String?
+  createdAt DateTime @default(now())
+}
