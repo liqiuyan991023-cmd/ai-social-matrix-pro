@@ -1,7 +1,15 @@
 {
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "dependencies": {
     "@iconify/react": "^6.0.2",
     "echarts": "^6.0.0",
-    "recharts": "^3.8.1"
+    "recharts": "^3.8.1",
+    "next": "^14.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }
