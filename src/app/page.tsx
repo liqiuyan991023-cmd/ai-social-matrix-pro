@@ -39,33 +39,6 @@ export default function Page() {
         src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"
         strategy="beforeInteractive"
       />
-
-      <style jsx global>{`
-        body {
-          font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-            Roboto, sans-serif;
-        }
-        .ad-placeholder {
-          background-color: #f3f4f6;
-          border: 2px dashed #d1d5db;
-          position: relative;
-        }
-        .ad-placeholder::after {
-          content: "【广告位】";
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          color: #9ca3af;
-          font-size: 0.875rem;
-          font-weight: 500;
-        }
-        .glass-nav {
-          backdrop-filter: blur(12px);
-          background-color: rgba(255, 255, 255, 0.8);
-        }
-      `}</style>
-
       <div className="bg-gray-50 text-gray-900 leading-relaxed">
         <nav className="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
