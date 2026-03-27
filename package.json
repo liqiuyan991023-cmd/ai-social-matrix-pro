@@ -10,6 +10,8 @@
     "recharts": "^3.8.1",
     "next": "^14.0.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "next-auth": "^4.24.7",
+    "framer-motion": "^11.0.0"
   }
 }
