@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import ClientProviders from "@/components/ClientProviders";
+import "@/styles/globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "AI Social Matrix Pro",
@@ -13,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN">
-      <body>
+      <body className={`${inter.className} min-h-screen antialiased`}>
         <ClientProviders>{children}</ClientProviders>
       </body>
     </html>

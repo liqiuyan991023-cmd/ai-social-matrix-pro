@@ -1,5 +1,6 @@
 import Script from "next/script";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 declare global {
   namespace JSX {
@@ -44,45 +45,45 @@ export default function Page() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16 items-center">
               <div className="flex items-center gap-2">
-                <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
                   <Ico className="text-white text-2xl" icon="mdi:matrix" />
                 </div>
-                <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">
+                <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-violet-600">
                   AI Social Matrix Pro
                 </span>
               </div>
 
               <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600">
-                <a className="hover:text-indigo-600 transition-colors" href="#">
+                <Link className="hover:text-primary transition-colors" href="/#features">
                   产品方案
-                </a>
-                <a className="hover:text-indigo-600 transition-colors" href="#">
+                </Link>
+                <Link className="hover:text-primary transition-colors" href="/tools">
                   AI文案中心
-                </a>
-                <a className="hover:text-indigo-600 transition-colors" href="#">
+                </Link>
+                <Link className="hover:text-primary transition-colors" href="/hot-topics">
                   热点监控
-                </a>
-                <a className="hover:text-indigo-600 transition-colors" href="#">
+                </Link>
+                <Link className="hover:text-primary transition-colors" href="/analytics">
                   数据分析
-                </a>
-                <a className="hover:text-indigo-600 transition-colors" href="#">
+                </Link>
+                <Link className="hover:text-primary transition-colors" href="/pricing">
                   定价
-                </a>
+                </Link>
               </div>
 
               <div className="flex items-center gap-4">
-                <a
-                  className="text-sm font-medium text-gray-600 hover:text-indigo-600"
-                  href="#"
+                <Link
+                  className="text-sm font-medium text-gray-600 hover:text-primary"
+                  href="/login"
                 >
                   登录
-                </a>
-                <a
-                  className="bg-indigo-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg"
-                  href="#"
+                </Link>
+                <Link
+                  className="bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:opacity-95 transition-all shadow-md hover:shadow-lg"
+                  href="/register"
                 >
                   免费开始使用
-                </a>
+                </Link>
                 <div className="md:hidden flex items-center">
                   <Ico className="text-2xl text-gray-600" icon="mdi:menu" />
                 </div>
@@ -95,13 +96,13 @@ export default function Page() {
           <section className="relative overflow-hidden bg-white pt-16 pb-20 lg:pt-24 lg:pb-28">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <div className="text-center max-w-3xl mx-auto">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold mb-6 tracking-wide uppercase">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold mb-6 tracking-wide">
                   <Ico icon="mdi:sparkles" />
                   2026年3月最新发布：V4.0 版本现已上线
                 </div>
                 <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight mb-6">
                   重塑社媒矩阵 <br />
-                  <span className="text-indigo-600 italic">AI 驱动</span>{" "}
+                  <span className="text-primary italic font-bold">AI 驱动</span>{" "}
                   全球业务增长
                 </h1>
                 <p className="text-lg text-gray-500 mb-10 leading-relaxed">
@@ -110,25 +111,31 @@ export default function Page() {
                   倍的流量红利。
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <button className="bg-indigo-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-indigo-700 transition-all flex items-center justify-center gap-2">
+                  <Link
+                    href="/tools"
+                    className="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/25"
+                  >
                     立即开启 AI 创作
                     <Ico icon="mdi:arrow-right" />
-                  </button>
-                  <button className="bg-white text-gray-700 border border-gray-200 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
+                  </Link>
+                  <Link
+                    href="/pricing"
+                    className="bg-white text-gray-700 border border-gray-200 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
+                  >
                     预约演示
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
 
-            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[600px] h-[600px] bg-indigo-50 rounded-full blur-3xl opacity-50" />
+            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[600px] h-[600px] bg-primary/15 rounded-full blur-3xl opacity-50" />
             <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-violet-50 rounded-full blur-3xl opacity-50" />
           </section>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
             <div className="ad-placeholder w-full h-24 rounded-2xl flex items-center justify-center overflow-hidden">
               <div className="flex flex-col items-center">
-                <span className="text-indigo-400 font-bold">
+                <span className="text-primary/80 font-bold">
                   新用户首月限时 0 元试用计划
                 </span>
                 <span className="text-xs text-gray-400 mt-1">
@@ -138,9 +145,9 @@ export default function Page() {
             </div>
           </div>
 
-          <section className="py-16 bg-gray-50">
+          <section id="features" className="py-16 bg-gray-50 scroll-mt-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">
                 为什么选择 AI Social Matrix Pro？
               </h2>
               <p className="text-gray-500">专为跨境社媒运营打造的高效率工作流</p>
@@ -148,7 +155,7 @@ export default function Page() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group">
-                <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                <div className="w-14 h-14 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                   <Ico className="text-3xl" icon="mdi:trending-up" />
                 </div>
                 <h3 className="text-xl font-bold mb-4">全球热点实时监控</h3>
@@ -169,7 +176,7 @@ export default function Page() {
               </div>
 
               <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group">
-                <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                <div className="w-14 h-14 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                   <Ico className="text-3xl" icon="mdi:auto-fix" />
                 </div>
                 <h3 className="text-xl font-bold mb-4">AI 智能内容生成</h3>
@@ -190,7 +197,7 @@ export default function Page() {
               </div>
 
               <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group">
-                <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                <div className="w-14 h-14 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                   <Ico className="text-3xl" icon="mdi:share-variant" />
                 </div>
                 <h3 className="text-xl font-bold mb-4">一键多平台发布</h3>
@@ -229,7 +236,7 @@ export default function Page() {
                         </p>
                       </div>
                       <a
-                        className="text-indigo-600 font-semibold flex items-center gap-1 hover:gap-2 transition-all"
+                        className="text-primary font-semibold flex items-center gap-1 hover:gap-2 transition-all"
                         href="#"
                       >
                         查看全部工具 <Ico icon="mdi:chevron-right" />
@@ -278,7 +285,7 @@ export default function Page() {
 
                       <div className="p-5 border border-gray-100 rounded-xl hover:shadow-md transition-shadow cursor-pointer bg-gray-50/50">
                         <Ico
-                          className="text-indigo-500 text-3xl mb-3"
+                          className="text-primary text-3xl mb-3"
                           icon="mdi:translate"
                         />
                         <h4 className="font-bold text-gray-900 mb-1 text-sm">
@@ -343,25 +350,25 @@ export default function Page() {
                     </div>
                   </div>
 
-                  <div className="bg-indigo-600 rounded-3xl p-10 text-white flex flex-wrap gap-8 items-center justify-between">
+                  <div className="bg-primary rounded-3xl p-10 text-white flex flex-wrap gap-8 items-center justify-between">
                     <div className="text-center">
                       <div className="text-4xl font-extrabold mb-1">85%</div>
-                      <div className="text-indigo-100 text-sm">创作时间节省</div>
+                      <div className="text-white/80 text-sm">创作时间节省</div>
                     </div>
                     <div className="text-center">
                       <div className="text-4xl font-extrabold mb-1">200%</div>
-                      <div className="text-indigo-100 text-sm">
+                      <div className="text-white/80 text-sm">
                         平均点击率提升
                       </div>
                     </div>
                     <div className="text-center">
                       <div className="text-4xl font-extrabold mb-1">1M+</div>
-                      <div className="text-indigo-100 text-sm">
+                      <div className="text-white/80 text-sm">
                         全球活跃创作者
                       </div>
                     </div>
                     <div className="bg-white/10 p-1 rounded-full flex">
-                      <button className="px-6 py-3 bg-white text-indigo-600 rounded-full font-bold hover:bg-indigo-50 transition-colors">
+                      <button className="px-6 py-3 bg-white text-primary rounded-full font-bold hover:bg-primary/5 transition-colors">
                         立即升级专家版
                       </button>
                     </div>
@@ -371,15 +378,15 @@ export default function Page() {
                 <aside className="w-full lg:w-80">
                   <div className="sticky top-24 space-y-6">
                     <div className="ad-placeholder w-full h-[400px] rounded-2xl" />
-                    <div className="bg-indigo-50 p-6 rounded-2xl border border-indigo-100">
-                      <h4 className="font-bold text-indigo-900 mb-2">
+                    <div className="bg-primary/5 p-6 rounded-2xl border border-primary/15">
+                      <h4 className="font-bold text-slate-900 mb-2">
                         加入官方专家社群
                       </h4>
-                      <p className="text-xs text-indigo-700 mb-4 leading-relaxed">
+                      <p className="text-xs text-slate-600 mb-4 leading-relaxed">
                         获取第一手跨境运营秘籍，与全球 50,000+
                         顶尖创作者共同进步。
                       </p>
-                      <button className="w-full bg-indigo-600 text-white py-2 rounded-lg text-sm font-semibold hover:bg-indigo-700">
+                      <button className="w-full bg-primary text-white py-2 rounded-lg text-sm font-semibold hover:brightness-110">
                         立即加入
                       </button>
                     </div>
@@ -397,7 +404,7 @@ export default function Page() {
                 <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                   <h4 className="font-bold flex justify-between items-center cursor-pointer">
                     支持哪些社交平台的一键发布？
-                    <Ico className="text-indigo-600" icon="mdi:plus" />
+                    <Ico className="text-primary" icon="mdi:plus" />
                   </h4>
                   <p className="mt-4 text-gray-500 text-sm">
                     目前我们已深度对接 TikTok, Instagram (Posts/Reels), YouTube
@@ -408,7 +415,7 @@ export default function Page() {
                 <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                   <h4 className="font-bold flex justify-between items-center cursor-pointer">
                     AI 生成的内容会被平台判定为搬运吗？
-                    <Ico className="text-indigo-600" icon="mdi:plus" />
+                    <Ico className="text-primary" icon="mdi:plus" />
                   </h4>
                   <p className="mt-4 text-gray-500 text-sm">
                     Matrix Pro
@@ -419,7 +426,7 @@ export default function Page() {
                 <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                   <h4 className="font-bold flex justify-between items-center cursor-pointer">
                     可以管理多个国家的账户吗？
-                    <Ico className="text-indigo-600" icon="mdi:plus" />
+                    <Ico className="text-primary" icon="mdi:plus" />
                   </h4>
                   <p className="mt-4 text-gray-500 text-sm">
                     当然支持。我们的系统支持环境隔离与全球代理配置，您可以轻松在同一个后台管理分布在全球不同区域的成百上千个账户矩阵。
@@ -435,10 +442,10 @@ export default function Page() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
               <div className="col-span-2">
                 <div className="flex items-center gap-2 mb-6">
-                  <div className="w-8 h-8 bg-indigo-600 rounded flex items-center justify-center">
+                  <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
                     <Ico className="text-white text-xl" icon="mdi:matrix" />
                   </div>
-                  <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">
+                  <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-violet-600">
                     AI Social Matrix Pro
                   </span>
                 </div>
@@ -446,13 +453,13 @@ export default function Page() {
                   全球领先的跨境社媒矩阵运营专家，通过人工智能技术，让每一条内容都发挥最大的商业价值。
                 </p>
                 <div className="flex gap-4 mt-6">
-                  <a className="text-gray-400 hover:text-indigo-600" href="#">
+                  <a className="text-gray-400 hover:text-primary" href="#">
                     <Ico className="text-2xl" icon="mdi:facebook" />
                   </a>
-                  <a className="text-gray-400 hover:text-indigo-600" href="#">
+                  <a className="text-gray-400 hover:text-primary" href="#">
                     <Ico className="text-2xl" icon="mdi:twitter" />
                   </a>
-                  <a className="text-gray-400 hover:text-indigo-600" href="#">
+                  <a className="text-gray-400 hover:text-primary" href="#">
                     <Ico className="text-2xl" icon="mdi:youtube" />
                   </a>
                 </div>
@@ -462,22 +469,22 @@ export default function Page() {
                 <h5 className="font-bold text-gray-900 mb-4 text-sm">产品</h5>
                 <ul className="space-y-2 text-sm text-gray-500">
                   <li>
-                    <a className="hover:text-indigo-600" href="#">
+                    <a className="hover:text-primary" href="#">
                       AI文案中心
                     </a>
                   </li>
                   <li>
-                    <a className="hover:text-indigo-600" href="#">
+                    <a className="hover:text-primary" href="#">
                       热点监控系统
                     </a>
                   </li>
                   <li>
-                    <a className="hover:text-indigo-600" href="#">
+                    <a className="hover:text-primary" href="#">
                       矩阵管理后台
                     </a>
                   </li>
                   <li>
-                    <a className="hover:text-indigo-600" href="#">
+                    <a className="hover:text-primary" href="#">
                       流量分析报表
                     </a>
                   </li>
@@ -488,22 +495,22 @@ export default function Page() {
                 <h5 className="font-bold text-gray-900 mb-4 text-sm">资源</h5>
                 <ul className="space-y-2 text-sm text-gray-500">
                   <li>
-                    <a className="hover:text-indigo-600" href="#">
+                    <a className="hover:text-primary" href="#">
                       运营博客
                     </a>
                   </li>
                   <li>
-                    <a className="hover:text-indigo-600" href="#">
+                    <a className="hover:text-primary" href="#">
                       API文档
                     </a>
                   </li>
                   <li>
-                    <a className="hover:text-indigo-600" href="#">
+                    <a className="hover:text-primary" href="#">
                       成功案例
                     </a>
                   </li>
                   <li>
-                    <a className="hover:text-indigo-600" href="#">
+                    <a className="hover:text-primary" href="#">
                       新手教程
                     </a>
                   </li>
@@ -514,22 +521,22 @@ export default function Page() {
                 <h5 className="font-bold text-gray-900 mb-4 text-sm">公司</h5>
                 <ul className="space-y-2 text-sm text-gray-500">
                   <li>
-                    <a className="hover:text-indigo-600" href="#">
+                    <a className="hover:text-primary" href="#">
                       关于我们
                     </a>
                   </li>
                   <li>
-                    <a className="hover:text-indigo-600" href="#">
+                    <a className="hover:text-primary" href="#">
                       加入我们
                     </a>
                   </li>
                   <li>
-                    <a className="hover:text-indigo-600" href="#">
+                    <a className="hover:text-primary" href="#">
                       合作伙伴
                     </a>
                   </li>
                   <li>
-                    <a className="hover:text-indigo-600" href="#">
+                    <a className="hover:text-primary" href="#">
                       隐私协议
                     </a>
                   </li>
@@ -543,11 +550,11 @@ export default function Page() {
                 </p>
                 <div className="flex flex-col gap-2">
                   <input
-                    className="px-4 py-2 bg-gray-100 border-none rounded-lg text-sm focus:ring-2 focus:ring-indigo-600 outline-none"
+                    className="px-4 py-2 bg-gray-100 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none"
                     placeholder="输入您的邮箱"
                     type="email"
                   />
-                  <button className="bg-indigo-600 text-white py-2 rounded-lg text-sm font-bold">
+                  <button className="bg-primary text-white py-2 rounded-lg text-sm font-bold">
                     订阅
                   </button>
                 </div>

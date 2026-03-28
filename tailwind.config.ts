@@ -9,10 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#6366f1",
+        primary: "#5d5cde",
         secondary: "#f43f5e",
         dark: "#1e293b",
         light: "#f8fafc",
+      },
+      boxShadow: {
+        card: "0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06)",
+        "card-hover":
+          "0 10px 40px -10px rgb(15 23 42 / 0.12), 0 4px 6px -2px rgb(15 23 42 / 0.06)",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
