@@ -1,13 +1,9 @@
 import NextAuth from 'next-auth';
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
-
+// 极简版配置：无Prisma，纯模拟登录，先跑通部署
 const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -22,34 +18,20 @@ const authOptions: NextAuthOptions = {
           type: 'password'
         }
       },
-      async authorize(credentials, req) {
-        if (!credentials?.email || !credentials?.password) {
-          return null;
+      async authorize(credentials) {
+        // 模拟登录：仅测试账号能登录（无需数据库）
+        if (credentials?.email === 'test@test.com' && credentials?.password === '123456') {
+          return { id: '1', name: 'Test User', email: 'test@test.com' };
         }
-
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
-        });
-
-        if (!user || !user.password) {
-          return null;
-        }
-
-        // 简单密码比对（先保证部署成功，以后再升级加密）
-        if (user.password !== credentials.password) {
-          return null;
-        }
-
-        return user;
+        return null;
       }
     })
   ],
   session: {
     strategy: 'jwt'
   },
-  secret: process.env.NEXTAUTH_SECRET || 'your-secret-key'
+  secret: process.env.NEXTAUTH_SECRET || 'temp-secret-key'
 };
 
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };
