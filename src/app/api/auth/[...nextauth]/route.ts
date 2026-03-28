@@ -35,7 +35,7 @@ const authOptions: NextAuthOptions = {
           return null;
         }
 
-        // 这里应该使用 bcrypt 比较密码，暂时简化处理
+        // 简单密码比对（先保证部署成功，以后再升级加密）
         if (user.password !== credentials.password) {
           return null;
         }
