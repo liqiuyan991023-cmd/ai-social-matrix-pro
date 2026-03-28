@@ -1,9 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { useRouter } from 'next/navigation'; // Next.js规范路由
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
@@ -11,60 +9,59 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // 加载状态
+  const router = useRouter(); // 初始化路由
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setSuccess('');
+    setIsLoading(true); // 开始加载
 
     try {
-      // 检查邮箱是否已存在
-      const existingUser = await prisma.user.findUnique({
-        where: { email }
-      });
-
-      if (existingUser) {
-        setError('该邮箱已被注册');
+      // 前端兜底校验（避免空请求）
+      if (!name || !email || !password) {
+        setError('姓名、邮箱、密码不能为空');
+        setIsLoading(false);
         return;
       }
 
-      // 创建新用户
-      const user = await prisma.user.create({
-        data: {
-          name,
-          email,
-          password
-        }
+      // 调用服务端API（核心：客户端不直接操作数据库）
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
       });
 
-      // 为新用户创建默认的免费套餐
-      await prisma.userPlan.create({
-        data: {
-          userId: user.id,
-          planType: 'free',
-          startDate: new Date()
-        }
-      });
+      const data = await res.json();
 
-      setSuccess('注册成功！请登录您的账号');
-      // 重置表单
+      if (!res.ok) {
+        throw new Error(data.error || '注册失败，请稍后重试');
+      }
+
+      // 注册成功处理
+      setSuccess(data.success);
       setName('');
       setEmail('');
       setPassword('');
 
-      // 3秒后跳转到登录页面
+      // 3秒后跳转登录页（Next.js规范路由，无刷新）
       setTimeout(() => {
-        window.location.href = '/login';
+        router.push('/login');
       }, 3000);
-    } catch (error) {
-      console.error('注册失败:', error);
-      setError('注册失败，请稍后重试');
+    } catch (err) {
+      console.error('注册失败:', err);
+      setError(err instanceof Error ? err.message : '注册失败，请稍后重试');
+    } finally {
+      setIsLoading(false); // 无论成败，结束加载
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <motion.div 
+      <motion.div
         className="max-w-md w-full space-y-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -129,7 +126,8 @@ export default function RegisterPage() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                disabled={isLoading} // 加载时禁用输入
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm disabled:bg-gray-50 dark:disabled:bg-gray-800"
                 placeholder="您的姓名"
               />
             </div>
@@ -145,7 +143,8 @@ export default function RegisterPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                disabled={isLoading}
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm disabled:bg-gray-50 dark:disabled:bg-gray-800"
                 placeholder="your@email.com"
               />
             </div>
@@ -161,7 +160,8 @@ export default function RegisterPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                disabled={isLoading}
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm disabled:bg-gray-50 dark:disabled:bg-gray-800"
                 placeholder="••••••••"
               />
             </div>
@@ -173,7 +173,8 @@ export default function RegisterPage() {
               name="terms"
               type="checkbox"
               required
-              className="h-4 w-4 text-primary focus:ring-primary border-gray-300 dark:border-gray-600 rounded"
+              disabled={isLoading}
+              className="h-4 w-4 text-primary focus:ring-primary border-gray-300 dark:border-gray-600 rounded disabled:opacity-50"
             />
             <label htmlFor="terms" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
               我同意 <a href="/terms" className="text-primary hover:text-primary/80">服务条款</a> 和 <a href="/privacy" className="text-primary hover:text-primary/80">隐私政策</a>
@@ -183,9 +184,10 @@ export default function RegisterPage() {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              disabled={isLoading}
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              注册
+              {isLoading ? '注册中...' : '注册'}
             </button>
           </div>
         </form>
