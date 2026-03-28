@@ -1,8 +1,8 @@
-// File: D:\github\ai-social-matrix-pro\ai-social-matrix-pro\src\app\api\stripe\checkout\route.ts
-import * as entry from '../../../../../../src/app/api/stripe/checkout/route.js'
+// File: D:\github\ai-social-matrix-pro\src\app\api\register\route.ts
+import * as entry from '../../../../../src/app/api/register/route.js'
 import type { NextRequest } from 'next/server.js'
 
-type TEntry = typeof import('../../../../../../src/app/api/stripe/checkout/route.js')
+type TEntry = typeof import('../../../../../src/app/api/register/route.js')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{
